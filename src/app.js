@@ -13,8 +13,10 @@ app.get("/", async (req, res) => {
   res.json(rows);
 });
 
-app.get("/call", async (req, res) => {
-  const [result] = await pool.query("SELECT * FROM productos");
+app.get("/call/:id", async (req, res) => {
+  const id = req.params;
+  console.log("este id es del backend: "+id)
+  const [result] = await pool.query("SELECT * FROM productos WHERE id = ?", [id]);
   res.json(result);
 });
 
